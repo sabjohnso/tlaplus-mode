@@ -1,1 +1,15 @@
+# Byte-compiled files
 *.elc
+
+# Packaging artifacts
+*.tar
+*-pkg.el
+*-autoloads.el
+
+# Backup and lock files
+*~
+\#*\#
+.\#*
+
+# Local configuration
+.dir-locals-2.el
