@@ -16,7 +16,7 @@ Emacs Lisp with `lexical-binding: t`. Read `~/.claude/lang/` for Emacs Lisp guid
 
 ```sh
 make compile   # byte-compile tlaplus-mode.el (must be warning-free)
-make check     # byte-compile + run all ERT tests in batch mode
+make test      # byte-compile + run all ERT tests in batch mode
 make clean     # remove .elc files
 ```
 
