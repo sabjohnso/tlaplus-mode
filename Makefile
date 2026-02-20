@@ -10,7 +10,9 @@ check: compile
 	  -l test/tlaplus-mode-test.el \
 	  -f ert-run-tests-batch-and-exit
 
+test: check
+
 clean:
 	rm -f *.elc test/*.elc
 
-.PHONY: compile check clean
+.PHONY: compile check test clean
