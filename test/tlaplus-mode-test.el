@@ -167,6 +167,14 @@ So \"a\\b\" is a complete 4-char string, not an escaped quote."
     (should (tlaplus-prettify-compose-p 1 3 "<<"))
     (should (tlaplus-prettify-compose-p 3 5 ">>"))))
 
+(ert-deftest tlaplus-test-prettify-compose-blocks-repeated-equals ()
+  "Compose predicate blocks == inside module delimiter ====...====."
+  (with-tlaplus-temp-buffer "============"
+    ;; == at positions 1-3 is surrounded by more = signs
+    (should-not (tlaplus-prettify-compose-p 1 3 "=="))
+    (should-not (tlaplus-prettify-compose-p 3 5 "=="))
+    (should-not (tlaplus-prettify-compose-p 5 7 "=="))))
+
 ;;; ---- Imenu -------------------------------------------------------------
 
 (ert-deftest tlaplus-test-imenu-operators ()

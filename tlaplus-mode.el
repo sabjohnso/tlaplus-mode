@@ -278,15 +278,23 @@ only the display is affected.")
 (defun tlaplus-prettify-compose-p (start end _match)
   "Compose predicate for TLA+ prettification.
 Blocks composition when the match boundary falls inside a word
-\(e.g. \\in inside \\intersect) or inside a string literal.
-Punctuation boundaries are not checked so that adjacent operators
-like << and >> compose independently in <<>>."
+\(e.g. \\in inside \\intersect), when a punctuation match is
+adjacent to the same character (e.g. == inside ====), or inside
+a string literal.  Different punctuation characters do not block
+each other, so << and >> compose independently in <<>>."
   (save-excursion
-    (not (or (and (memq (char-syntax (char-after start)) '(?w ?_))
-                  (memq (char-syntax (or (char-before start) ?\s)) '(?w ?_)))
-             (and (memq (char-syntax (char-before end)) '(?w ?_))
-                  (memq (char-syntax (or (char-after end) ?\s)) '(?w ?_)))
+    (not (or (tlaplus--boundary-extends-p (char-before start) (char-after start))
+             (tlaplus--boundary-extends-p (char-after end) (char-before end))
              (nth 3 (syntax-ppss start))))))
+
+(defun tlaplus--boundary-extends-p (adjacent boundary)
+  "Return non-nil if ADJACENT would extend the token at BOUNDARY.
+For word characters, any adjacent word character extends the token.
+For punctuation, only the same character extends it."
+  (when (and adjacent boundary)
+    (if (memq (char-syntax boundary) '(?w ?_))
+        (memq (char-syntax adjacent) '(?w ?_))
+      (eq adjacent boundary))))
 
 ;;; Indentation
 
