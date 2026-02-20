@@ -1,8 +1,11 @@
 ;;; tlaplus-mode.el --- Major mode for TLA+ specifications -*- lexical-binding: t -*-
 
-;; Author: TLA+ Experiments
-;; Keywords: languages, tla+, formal methods
+;; Author: Samuel B. Johnson
+;; URL: https://github.com/sabjohnso/tlaplus-mode
+;; Keywords: languages
 ;; Version: 0.2.0
+;; Package-Requires: ((emacs "25.1"))
+;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
 
@@ -196,8 +199,7 @@ Skips matches that are already inside a string or block comment."
     ("\\<[0-9]+\\>" . font-lock-constant-face)
 
     ;; Primed variables (next-state): var'
-    ("\\<\\([A-Za-z_]\\w*\\)'" (1 font-lock-variable-name-face))
-    )
+    ("\\<\\([A-Za-z_]\\w*\\)'" (1 font-lock-variable-name-face)))
   "Font lock keywords for `tlaplus-mode'.")
 
 ;;; Prettify Symbols — mathematical display
