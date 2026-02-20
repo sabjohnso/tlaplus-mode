@@ -160,6 +160,13 @@ So \"a\\b\" is a complete 4-char string, not an escaped quote."
     ;; "x"(1) " "(2) "\\"(3) "i"(4) "n"(5) "t"(6) "e"(7) ...
     (should-not (tlaplus-prettify-compose-p 3 6 "\\in"))))
 
+(ert-deftest tlaplus-test-prettify-compose-empty-tuple ()
+  "Compose predicate allows << and >> in adjacent <<>>."
+  (with-tlaplus-temp-buffer "<<>>"
+    ;; "<<"(1-2) ">>"(3-4)
+    (should (tlaplus-prettify-compose-p 1 3 "<<"))
+    (should (tlaplus-prettify-compose-p 3 5 ">>"))))
+
 ;;; ---- Imenu -------------------------------------------------------------
 
 (ert-deftest tlaplus-test-imenu-operators ()

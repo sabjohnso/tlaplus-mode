@@ -277,19 +277,16 @@ only the display is affected.")
 
 (defun tlaplus-prettify-compose-p (start end _match)
   "Compose predicate for TLA+ prettification.
-Like `prettify-symbols-default-compose-p' but allows composition
-in comments (only blocks inside strings).  Also checks syntax
-boundaries so that \\in does not match inside \\intersect, etc.
-Uses `save-excursion' because `syntax-ppss' moves point, which
-would otherwise break font-lock's keyword search loop."
+Blocks composition when the match boundary falls inside a word
+\(e.g. \\in inside \\intersect) or inside a string literal.
+Punctuation boundaries are not checked so that adjacent operators
+like << and >> compose independently in <<>>."
   (save-excursion
-    (let* ((syntaxes-beg (if (memq (char-syntax (char-after start)) '(?w ?_))
-                              '(?w ?_) '(?. ?\\)))
-           (syntaxes-end (if (memq (char-syntax (char-before end)) '(?w ?_))
-                             '(?w ?_) '(?. ?\\))))
-      (not (or (memq (char-syntax (or (char-before start) ?\s)) syntaxes-beg)
-               (memq (char-syntax (or (char-after end) ?\s)) syntaxes-end)
-               (nth 3 (syntax-ppss start)))))))
+    (not (or (and (memq (char-syntax (char-after start)) '(?w ?_))
+                  (memq (char-syntax (or (char-before start) ?\s)) '(?w ?_)))
+             (and (memq (char-syntax (char-before end)) '(?w ?_))
+                  (memq (char-syntax (or (char-after end) ?\s)) '(?w ?_)))
+             (nth 3 (syntax-ppss start))))))
 
 ;;; Indentation
 
