@@ -278,7 +278,7 @@ Used by `prettify-symbols-mode'.  The buffer text is unchanged;
 only the display is affected.")
 
 (defun tlaplus-prettify-compose-p (start end _match)
-  "Compose predicate for TLA+ prettification.
+  "Return non-nil if the symbol between START and END should be composed.
 Blocks composition when the match boundary falls inside a word
 \(e.g. \\in inside \\intersect), when a punctuation match is
 adjacent to the same character (e.g. == inside ====), or inside
