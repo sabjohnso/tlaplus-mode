@@ -210,6 +210,7 @@ Skips matches that are already inside a string or block comment."
     ("\\/"    . ?∨)
     ("~"      . ?¬)
     ("\\lnot" . ?¬)
+    ("\\neg"  . ?¬)
     ("\\land" . ?∧)
     ("\\lor"  . ?∨)
     ("\\equiv" . ?≡)
