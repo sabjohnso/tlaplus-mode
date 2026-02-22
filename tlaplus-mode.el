@@ -3,7 +3,7 @@
 ;; Author: Samuel B. Johnson
 ;; URL: https://github.com/sabjohnso/tlaplus-mode
 ;; Keywords: languages
-;; Version: 0.2.4
+;; Version: 0.2.5
 ;; Package-Requires: ((emacs "25.1"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -263,6 +263,7 @@ Skips matches that are already inside a string or block comment."
     ("<-"     . ?←)
     ("|->"    . ?↦)
     ;; Algebraic
+    ("\\o"      . ?∘)
     ("\\circ"   . ?∘)
     ("\\oplus"  . ?⊕)
     ("\\ominus" . ?⊖)
