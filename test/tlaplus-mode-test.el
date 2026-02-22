@@ -147,7 +147,9 @@ So \"a\\b\" is a complete 4-char string, not an escaped quote."
     (should (equal (alist-get "[]" prettify-symbols-alist nil nil #'string=) ?□))
     (should (equal (alist-get "<=" prettify-symbols-alist nil nil #'string=) ?≤))
     (should (equal (alist-get ">=" prettify-symbols-alist nil nil #'string=) ?≥))
-    (should (equal (alist-get "=<" prettify-symbols-alist nil nil #'string=) ?≤))))
+    (should (equal (alist-get "=<" prettify-symbols-alist nil nil #'string=) ?≤))
+    (should (equal (alist-get "\\noteq" prettify-symbols-alist nil nil #'string=) ?≠))
+    (should (equal (alist-get "/=" prettify-symbols-alist nil nil #'string=) ?≠))))
 
 (ert-deftest tlaplus-test-prettify-compose-at-boundary ()
   "Compose predicate allows composition at proper word boundaries."

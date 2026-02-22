@@ -273,6 +273,8 @@ Skips matches that are already inside a string or block comment."
     ("\\bullet" . ?•)
     ;; Miscellaneous
     ("#"      . ?≠)
+    ("/="     . ?≠)
+    ("\\noteq" . ?≠)
     ("<<"     . ?⟨)
     (">>"     . ?⟩)
     ("=="     . ?≜))
