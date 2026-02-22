@@ -144,7 +144,10 @@ So \"a\\b\" is a complete 4-char string, not an escaped quote."
   (with-tlaplus-temp-buffer ""
     (should (equal (alist-get "/\\" prettify-symbols-alist nil nil #'string=) ?∧))
     (should (equal (alist-get "\\in" prettify-symbols-alist nil nil #'string=) ?∈))
-    (should (equal (alist-get "[]" prettify-symbols-alist nil nil #'string=) ?□))))
+    (should (equal (alist-get "[]" prettify-symbols-alist nil nil #'string=) ?□))
+    (should (equal (alist-get "<=" prettify-symbols-alist nil nil #'string=) ?≤))
+    (should (equal (alist-get ">=" prettify-symbols-alist nil nil #'string=) ?≥))
+    (should (equal (alist-get "=<" prettify-symbols-alist nil nil #'string=) ?≤))))
 
 (ert-deftest tlaplus-test-prettify-compose-at-boundary ()
   "Compose predicate allows composition at proper word boundaries."
@@ -174,6 +177,18 @@ So \"a\\b\" is a complete 4-char string, not an escaped quote."
     (should-not (tlaplus-prettify-compose-p 1 3 "=="))
     (should-not (tlaplus-prettify-compose-p 3 5 "=="))
     (should-not (tlaplus-prettify-compose-p 5 7 "=="))))
+
+(ert-deftest tlaplus-test-prettify-compose-comparison-operators ()
+  "Compose predicate allows <= and >= at proper boundaries."
+  (with-tlaplus-temp-buffer "x <= y"
+    ;; "x"(1) " "(2) "<"(3) "="(4) " "(5) "y"(6)
+    (should (tlaplus-prettify-compose-p 3 5 "<=")))
+  (with-tlaplus-temp-buffer "x >= y"
+    ;; "x"(1) " "(2) ">"(3) "="(4) " "(5) "y"(6)
+    (should (tlaplus-prettify-compose-p 3 5 ">=")))
+  (with-tlaplus-temp-buffer "x =< y"
+    ;; "x"(1) " "(2) "="(3) "<"(4) " "(5) "y"(6)
+    (should (tlaplus-prettify-compose-p 3 5 "=<"))))
 
 ;;; ---- Imenu -------------------------------------------------------------
 

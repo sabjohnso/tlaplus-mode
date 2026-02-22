@@ -239,6 +239,9 @@ Skips matches that are already inside a string or block comment."
     ("\\sqsubseteq" . ?⊑)
     ("\\sqsupseteq" . ?⊒)
     ;; Relations
+    ("<="        . ?≤)
+    (">="        . ?≥)
+    ("=<"        . ?≤)
     ("\\leq"     . ?≤)
     ("\\geq"     . ?≥)
     ("\\prec"    . ?≺)
