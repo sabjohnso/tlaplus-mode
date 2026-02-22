@@ -3,7 +3,7 @@
 ;; Author: Samuel B. Johnson
 ;; URL: https://github.com/sabjohnso/tlaplus-mode
 ;; Keywords: languages
-;; Version: 0.2.2
+;; Version: 0.2.3
 ;; Package-Requires: ((emacs "25.1"))
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
